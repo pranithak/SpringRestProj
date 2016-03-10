@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <title>Angular Demo</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+        <script>
+            function Customer($scope){
+            $scope.CustomerName="prani";
+            $scope.CustomerId="1001";
+            }
+            var myapp=angular.module("demoApp" , [])
+            .controller("CustomerObj",Customer);
+        </script>
+    </head>
+    <body ng-app="demoApp">
+
+    <div id="custscreen" ng-controller = "CustomerObj">
+           Customer Name  : <input type="text" ng-model="CustomerName" id="CustomerName"/> <br/>
+           Customer Id  : <input type="text" ng-model="CustomerId" id="CustomerId"/>
+           {{ CustomerName }}
+           {{ CustomerId }}
+
+       </div>
+    </body>
+</html>

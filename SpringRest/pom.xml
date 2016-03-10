@@ -133,7 +133,11 @@
             <!--<version>2.0.8</version>-->
         <!--</dependency>-->
 
-
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.1.1</version>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -177,6 +181,8 @@
             <version>1.6.4</version>
         </dependency>
 
+
+
     </dependencies>
     <profiles>
         <profile>
@@ -217,6 +223,69 @@
                             </execution>
                         </executions>
                     </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-compiler-plugin</artifactId>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
+                        </configuration>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxb2-maven-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>xjc</id>
+                                <goals>
+                                    <goal>xjc</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <schemaDirectory>${basedir}/src/main/resources/schema</schemaDirectory>
+                            <schemaFiles>customer.xsd</schemaFiles>
+                            <!--<sources>-->
+                                <!--<source>${basedir}/src/main/resources/schema/customer.xsd</source>-->
+                            <!--</sources>-->
+                             <!-- The package of your generated sources -->
+
+                            <!--<outPutDirectory>${basedir}/src/main/java/</outPutDirectory>-->
+                            <clearOutputDir>true</clearOutputDir>
+                            <packageName>com.pranitha.jaxb</packageName>
+
+
+                        </configuration>
+                    </plugin>
+
+
+                    <!--<plugin>-->
+                        <!--<groupId>org.jvnet.jaxb2.maven2</groupId>-->
+                        <!--<artifactId>maven-jaxb2-plugin</artifactId>-->
+                        <!--<version>0.7.1</version>-->
+                        <!--<executions>-->
+                            <!--<execution>-->
+                                <!--<id>schema1-generate</id>-->
+                                <!--<goals>-->
+                                    <!--<goal>generate</goal>-->
+                                <!--</goals>-->
+                                <!--<configuration>-->
+                                    <!--<schemaDirectory>${basedir}/src/main/resources/schema</schemaDirectory>-->
+                                    <!--<schemaIncludes>-->
+                                        <!--<include>customer.xsd</include>-->
+                                    <!--</schemaIncludes>-->
+                                    <!--<generatePackage>com.pranitha.jaxb</generatePackage>-->
+                                    <!--<generateDirectory>${basedir}/src/main/java</generateDirectory>-->
+                                <!--</configuration>-->
+                            <!--</execution>-->
+
+                        <!--</executions>-->
+                    <!--</plugin>-->
+
+
                 </plugins>
             </build>
         </profile>

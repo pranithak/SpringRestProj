@@ -3,7 +3,10 @@ package com.pranitha.springrest.controller;
 import com.pranitha.springrest.model.Customer;
 import com.pranitha.springrest.service.CustomerService;
 import com.pranitha.springrest.service.CustomerServiceImpl;
+import com.pranitha.springrest.util.CustomerAge;
+import com.pranitha.springrest.util.MaxSalary;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -25,8 +29,31 @@ public class ShoppingCartController {
     private static final Logger logger = Logger.getLogger(ShoppingCartController.class);
 
 
+    @Resource(name="customerService")
+    private CustomerService customerService ;
 
-    CustomerService customerService ;
+
+
+    //CustomerService customerService ;
+    MaxSalary salary;
+
+    CustomerAge customerAge;
+
+    public CustomerAge getCustomerAge() {
+        return customerAge;
+    }
+
+    public void setCustomerAge(CustomerAge customerAge) {
+        this.customerAge = customerAge;
+    }
+
+    public MaxSalary getSalary() {
+        return salary;
+    }
+
+    public void setSalary(MaxSalary salary) {
+        this.salary = salary;
+    }
 
     public CustomerService getCustomerService() {
         return customerService;
@@ -42,6 +69,19 @@ public class ShoppingCartController {
     public ModelAndView index() {
         String message = "This is my spring rest ";
         return new ModelAndView("index", "message",  message);
+
+    }
+    @RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+    public ModelAndView login() {
+        String message = "This is my login page ";
+        return new ModelAndView("login", "message",  message);
+
+    }
+
+    @RequestMapping(value = "/homePage", method = RequestMethod.GET)
+    public ModelAndView home() {
+        String message = "This is my home page ";
+        return new ModelAndView("home", "message",  message);
 
     }
 
@@ -64,6 +104,30 @@ public ResponseEntity<List<Customer>> listAllCustomers() {
             return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);// 204   You many decide to return HttpStatus.NOT_FOUND
         }
         return new ResponseEntity<List<Customer>>(customerList, HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/customers/salary", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Customer> listAllCustomersSal() {
+
+        List<Customer> customerList = customerService.findAllCustomers();
+
+        Customer customer = salary.getMaxsalary(customerList);
+        if(customerList.isEmpty()){
+            return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);// 204   You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/customers/ages/{age}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Customer>> getAllCustomersAge(@PathVariable("age") int age) {
+
+        List<Customer> customerList = customerService.findAllCustomers();
+        List<Customer> user = customerAge.getCustomersAge(customerList,age);
+        if(customerList.isEmpty()){
+            return new ResponseEntity<List<Customer>>(HttpStatus.NO_CONTENT);// 204   You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Customer>>(user, HttpStatus.OK);
     }
 
 
@@ -95,6 +159,8 @@ public ResponseEntity<List<Customer>> listAllCustomers() {
 //        return new ResponseEntity<Customer>(user1, HttpStatus.OK);
 //
 //    }
+
+
 
     @RequestMapping(value = "/customers" , method = RequestMethod.POST)
     public ResponseEntity<Void> saveCustomer(@RequestBody Customer customer ,  UriComponentsBuilder ucBuilder){
@@ -152,7 +218,9 @@ public ResponseEntity<List<Customer>> listAllCustomers() {
 
         customerService.updateCustomer(currentCustomer);
 
-        return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);    }
+        return new ResponseEntity<Customer>(currentCustomer, HttpStatus.OK);
+    }
+
 
 
 }

@@ -2,11 +2,11 @@ package com.pranitha.springrest.model;
 
 import com.sun.javafx.beans.IDProperty;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by naveen on 1/19/16.
@@ -17,13 +17,23 @@ import java.io.Serializable;
 
 public class Customer implements Serializable{
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
     private String name;
     private int age;
     private double salary;
+//    @OneToMany
+//    List<Address> listAddress;
+//
+//    public List<Address> getListAddress() {
+//        return listAddress;
+//    }
+//
+//    public void setListAddress(List<Address> listAddress) {
+//        this.listAddress = listAddress;
+//    }
 
-
-public Customer(){
+    public Customer(){
 
     }
 
@@ -32,6 +42,8 @@ public Customer(){
         this.age = age;
         this.salary = salary;
     }
+
+
 
     public Customer(int id, String name, int age, double salary) {
         this.id = id;

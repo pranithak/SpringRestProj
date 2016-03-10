@@ -25,5 +25,7 @@ public interface CustomerService {
 
     public boolean isCustomerExist(Customer customer);
 
+    // Customer customerAddresses(int id);
+
 
 }

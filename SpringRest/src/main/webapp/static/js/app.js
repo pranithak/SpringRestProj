@@ -1,3 +1,5 @@
 'use strict';
 
-var myApp = angular.module('myApp',[]);
+var customerApp = angular.module('myApp',['customerController']);
+
+var customerController = angular.module('customerController',[]);

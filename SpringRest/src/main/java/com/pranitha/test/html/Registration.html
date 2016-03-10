@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:bg-color="http://www.w3.org/1999/xhtml"
+      xmlns:background-color="http://java.sun.com/xml/ns/persistence/orm">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="js/registration.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Logo</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav">
+                <li><a href="home.html">Home</a></li>
+                <li ><a href="Registration.html">Registration</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="login.html"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<form background-color:#fff>
+    <table align="center" >
+        <tbody>
+        <h3 bg-color:red align="center">Registration Page</h3>
+        <tr>
+            <td><label>First Name:</label></td>
+            <td><input name="fname" id="firstname" type="text" /><br><span style="color:red;" id="errfn"></span>
+                <br></td>
+        </tr>
+
+        <tr>
+
+            <td><label>Last Name: </label></td>
+            <td><input type="text" name="LastName" id="lastname"/><br><span style="color:red;" id="errln"></span>
+                <br></td>
+
+        </tr>
+
+        <tr>
+
+            <td><label>User Name: </label></td>
+            <td><input type="text" name="UserName" id="username"/><br><span style="color:red;" id="errun"></span>
+                <br></td>
+
+        </tr>
+        <tr>
+
+            <td><label>Password:</label></td>
+            <td><input type="password" name="Password" id="password"/><br><span style="color:red;" id="errpswd"></span>
+                <br></td>
+
+        </tr>
+
+        <tr>
+
+            <td><label>Re-Enter Password:</label></td>
+            <td><input type="password" name="Re-Password" id="repassword" onchange="validate()"/><br><span style="color:red;" id="errrepswd"></span>
+                <br></td>
+
+        </tr>
+        <tr>
+
+            <td><label> Gender:</label></td>
+            <td><input type="checkbox" name="Gender">F</input></td>
+            <td><input type="checkbox" name="Gender">M</input><br>
+                <br></td>
+
+        </tr>
+
+        <tr>
+
+            <td><label>Email:</label></td>
+            <td><input type="email" name="email" id="email"/><br><span style="color:red;" id="erremail"></span>
+                <br></td>
+
+        </tr>
+        <br>
+        <br>
+        <tr>
+
+            <td><a href="login.html"><input type="button" value="Submit" id="submit" onclick="validate1()"/></a></td>
+
+        </tr>
+   </tbody>
+    </table>
+
+</form>
+</body>
+</html>

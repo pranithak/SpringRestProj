@@ -100,19 +100,31 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+
+    public Customer customerAddresses(int id){
+        String sql="select * from customer c join address a on c.id=a.customer_id and c.id=?;";
+
+        return jdbcTemplate.queryForObject(sql,new Object[]{id},new CustomerMapper());
+    }
+
+
+
     public Customer updateCustomer(Customer customer) {
 
       //  int index = customersList.indexOf(customer);
-        String sql = "update customer SET name = ? where id = ?";
-         jdbcTemplate.update(sql,new Object[]{customer.getName() ,customer.getId()});
+        String sql = "update customer SET name = ?, age = ?, salary = ? where id = ?";
+         jdbcTemplate.update(sql,new Object[]{customer.getName(),customer.getAge(),customer.getSalary() ,customer.getId()});
         return customer;
 
     }
 
     public void deleteCustomerById(int id) {
 
-        String sql = "delete from customer where id = ? ";
-        jdbcTemplate.update(sql, new Object[]{id});
+        String sql1 = "delete from address where customer_id = ? ";
+        String sql2 = "delete from customer where id = ? ";
+        jdbcTemplate.update(sql1, new Object[]{id});
+        jdbcTemplate.update(sql2, new Object[]{id});
+
 
     }
 

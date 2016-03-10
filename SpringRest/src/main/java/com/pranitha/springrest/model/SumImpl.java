@@ -10,4 +10,5 @@ public class SumImpl implements Sum{
         int c = a+b;
         return c;
     }
+
 }
